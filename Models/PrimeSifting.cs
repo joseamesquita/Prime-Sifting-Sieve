@@ -4,32 +4,47 @@ namespace Prime.Models
 {
     public class Sifting
     {
-        static bool IsPrime(int number)
+        public static void IsPrime(int n)
         {
-            if(number <= 1)
-                return false;
-            if (number <= 3)
-                return true;
-            
-            if (number%2 == 0 || number%3 == 0)
-                return false;
+            bool[] prime = new bool[n+1]; 
+          
+            for(int i = 0; i < n; i++) 
+              prime[i] = true; 
 
-            for(int i = 5; i * i <= number; i = i+6)
-                if(number % 1 == 0 || number % (i + 2) == 0)
-                    return false;             
+            // Console.WriteLine("-----first loop-----");
+            // foreach(bool i in prime)
+            // Console.WriteLine(i);
+            // Console.WriteLine("-----first loop-----");
 
-            return true;
-            
-        }
+            for(int p = 2; p*p <= n; p++) 
+            { 
+              // If prime[p] is not changed, 
+              // then it is a prime 
+              if(prime[p] == true) 
+              
+              // Console.WriteLine("-----second loop-----");
+              // foreach(bool i in prime)
+              // Console.WriteLine(i);
+              // Console.WriteLine("-----second loop-----"); 
+              { 
+                  // Update all multiples of p 
+                  for(int i = p*p; i <= n; i += p) 
+                      
+                      prime[i] = false;
+                      // Console.WriteLine("---p----");
+                      // Console.WriteLine(p);
 
-    public static void PrintPrimes(int number)
-    {
-        for(int i = 2; i <= number; i++)
-        {
-            if (IsPrime(i))
-                Console.WriteLine(i + " ");
-            }
-        }
-    }
-}   
-
+                  // Console.WriteLine("-----third loop-----");
+                  // foreach(bool i in prime)
+                  // Console.WriteLine(i);
+                  // Console.WriteLine("-----third loop-----"); 
+              } 
+          } 
+        //Print all primes
+        for(int i = 2; i <= n; i++) 
+        { 
+            if(prime[i] == true) 
+                Console.WriteLine(i); 
+        } 
+} }  
+}
